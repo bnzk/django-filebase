@@ -1,0 +1,198 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: django-folderless\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-04-18 14:35+0200\n"
+"PO-Revision-Date: 2014-04-19 21:23+0000\n"
+"Last-Translator: bnzk <bnzk@bnzk.ch>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: admin.py:17 models.py:61
+msgid "Extension"
+msgstr "Extension"
+
+#: admin.py:32
+msgid "Type"
+msgstr "Type"
+
+#: admin.py:150
+#, python-format
+msgid ""
+"Duplicate detected: File with same contents or same name (%(filename)s) "
+"already exists. File was not uploaded."
+msgstr ""
+
+#: conf.py:27
+msgid "Image"
+msgstr "Image"
+
+#: conf.py:31
+msgid "Video"
+msgstr "Video"
+
+#: conf.py:35
+msgid "PDF document"
+msgstr "PDF document"
+
+#: conf.py:39
+msgid "Flash"
+msgstr "Flash"
+
+#: conf.py:43
+msgid "Archive (zip, etc)"
+msgstr "Archive (zip, etc)"
+
+#: conf.py:47
+msgid "Audio"
+msgstr "Audio"
+
+#: conf.py:51
+msgid "Text document"
+msgstr "Text document"
+
+#: conf.py:55
+msgid "Spreadsheet"
+msgstr "Spreadsheet"
+
+#: conf.py:59
+msgid "Presentation"
+msgstr "Presentation"
+
+#: models.py:33 models.py:70
+msgid "File"
+msgstr "File"
+
+#: models.py:37
+msgid "name"
+msgstr ""
+
+#: models.py:39
+#, fuzzy
+#| msgid "File"
+msgid "Filename"
+msgstr "File"
+
+#: models.py:40
+msgid "Use for renaming your file on the server"
+msgstr ""
+
+#: models.py:43
+msgid "Author"
+msgstr "Author"
+
+#: models.py:45
+msgid "Copyright"
+msgstr "Copyright"
+
+#: models.py:47
+msgid "File type"
+msgstr "File type"
+
+#: models.py:54
+msgid "Uploader"
+msgstr "Uploader"
+
+#: models.py:57
+msgid "Created"
+msgstr "Created"
+
+#: models.py:59
+msgid "Modified"
+msgstr "Modified"
+
+#: models.py:63
+msgid "Checksum"
+msgstr "Checksum"
+
+#: models.py:63
+msgid "For preventing duplicates"
+msgstr "For preventing duplicates"
+
+#: models.py:71
+msgid "Files"
+msgstr "Files"
+
+#: models.py:88
+msgid "File extension must stay the same."
+msgstr ""
+
+#: models.py:144
+msgid "Thumb"
+msgstr ""
+
+#: models.py:160
+msgid "Referenced?"
+msgstr ""
+
+#: templates/admin/folderless/file/change_list.html:9
+msgid "of"
+msgstr "of"
+
+#: templates/admin/folderless/file/change_list.html:10
+#, fuzzy
+#| msgid "Uploader"
+msgid "uploaded"
+msgstr "Uploader"
+
+#: templates/admin/folderless/file/change_list.html:11
+msgid "duplicates/errors"
+msgstr ""
+
+#: templates/admin/folderless/file/change_list.html:14
+#, fuzzy
+#| msgid "Uploader"
+msgid "Upload new file"
+msgstr "Uploader"
+
+#: templates/admin/folderless/file_widget.html:21
+msgid "no file selected"
+msgstr "no file selected"
+
+#: templates/admin/folderless/file_widget.html:31
+#: templates/admin/folderless/file_widget.html:34
+#: templates/admin/folderless/file_widget.html:35
+msgid "Browse"
+msgstr "Browse"
+
+#: templates/admin/folderless/file_widget.html:40
+#: templates/admin/folderless/file_widget.html:41
+msgid "Upload"
+msgstr "Upload"
+
+#: templates/admin/folderless/file_widget.html:46
+#: templates/admin/folderless/file_widget.html:47
+msgid "Edit"
+msgstr "Edit"
+
+#: templates/admin/folderless/file_widget.html:52
+#: templates/admin/folderless/file_widget.html:53
+msgid "Remove"
+msgstr "Remove"
+
+#~ msgid "Add %(name)s"
+#~ msgstr "Add %(name)s"
+
+#~ msgid "Title"
+#~ msgstr "Title"
+
+#~ msgid "Original filename"
+#~ msgstr "Original filename"
+
+#~ msgid "errors"
+#~ msgstr "errors"
+
+#~ msgid "file"
+#~ msgstr "file"
+
+#~ msgid "dummy"
+#~ msgstr "dummy"
