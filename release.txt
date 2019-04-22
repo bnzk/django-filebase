@@ -1,7 +1,6 @@
 
-
 git flow release start 0.2.
-version bump in folderless/__init__.py
+version bump in filebase/__init__.py
 git flow release finish 0.2.
 git push --all; git push --tags
 git push upstream --all; git push upstream --tags

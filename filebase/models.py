@@ -13,15 +13,11 @@ from django.utils import timezone
 from easy_thumbnails.fields import ThumbnailerField
 from easy_thumbnails.files import get_thumbnailer
 
-from .conf import settings
-from folderless.utils import get_valid_filename, sha1_from_file, model_get_all_related_objects
+from . import conf
+from .utils import get_valid_filename, sha1_from_file, model_get_all_related_objects
 
 # compat
-import django
-if django.VERSION[:2] < (1, 10):
-    from django.core import urlresolvers
-else:
-    from django import urls as urlresolvers
+from django import urls as urlresolvers
 
 
 OTHER_TYPE = 'other'

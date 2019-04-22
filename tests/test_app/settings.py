@@ -25,16 +25,17 @@ APP_ROOT = os.path.abspath(
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': ':memory:',
+        'NAME': os.path.join('..', '..', 'test_app.db'),
     }
 }
 
-ROOT_URLCONF = 'folderless.tests.urls'
+ROOT_URLCONF = 'tests.test_app.urls'
 
 # media root is overridden when needed in tests
-MEDIA_ROOT = tempfile.mkdtemp(suffix='folderless_media_root')
+# MEDIA_ROOT = tempfile.mkdtemp(suffix='folderless_media_root')
+MEDIA_ROOT = os.path.join(APP_ROOT, os.path.join('..', '..', 'test_app_media'))  # noqa
+FILE_UPLOAD_TEMP_DIR = '/tmp'  # no more?
 MEDIA_URL = "/media/"
-FILE_UPLOAD_TEMP_DIR = tempfile.mkdtemp(suffix='folderless_temp')
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(APP_ROOT, '../test_app_static')
 STATICFILES_DIRS = (
@@ -89,24 +90,13 @@ EXTERNAL_APPS = (
     'django.contrib.messages',
     'django.contrib.sessions',
     'django.contrib.staticfiles',
-    'django.contrib.sitemaps',
     'django.contrib.sites',
-    'django_nose',
     'easy_thumbnails',
 )
 
 INTERNAL_APPS = (
-    'folderless',
-    'folderless.tests.test_app',
-)
-
-MIDDLEWARE_CLASSES = (
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    # Uncomment the next line for simple clickjacking protection:
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
+    'filebase',
+    'tests.test_app',
 )
 
 MIDDLEWARE = (
