@@ -1,8 +1,75 @@
-from django.conf import settings as django_settings
+from django.conf import settings as settings
 from django.core.files.storage import DefaultStorage
 from django.utils.translation import ugettext_lazy as _
 
 
+def _get_or_default(local_setting_name, setting_default):
+    global_setting_name = 'FILEBASE_{}'.format(local_setting_name)
+    setting_value = getattr(
+        settings,
+        global_setting_name,
+        setting_default,
+    )
+    globals()[local_setting_name] = setting_value
+    if not getattr(settings, global_setting_name, None):
+        setattr(settings, global_setting_name, setting_value)
+
+# where to store files
+_get_or_default('FILE_STORAGE', DefaultStorage())
+
+
+# where to store thumbnails
+_get_or_default('THUMBNAIL_STORAGE', DefaultStorage())
+
+
+# upload to (within storage). can be a callable
+_get_or_default('UPLOAD_TO', 'files')
+
+
+# put thumbnails in (within its storage). can be a callable
+_get_or_default('THUMBNAIL_TO', 'thumbs')
+
+
+# file types
+_get_or_default('FILE_TYPES', {
+        'image': {
+            'title': _(u'Image'),
+            'extensions': ('jpg', 'jpeg', 'png', 'gif', 'tif', 'tiff', ),
+        },
+        'video': {
+            'title': _(u'Video'),
+            'extensions': ('mp4', 'avi', 'mkv', 'ogg', 'wma', 'mov'),
+        },
+        'pdf': {
+            'title': _(u'PDF document'),
+            'extensions': ('pdf'),
+        },
+        'flash': {
+            'title': _(u'Flash'),
+            'extensions': ('swf', 'fla', 'as3'),
+        },
+        'archive': {
+            'title': _(u'Archive (zip, etc)'),
+            'extensions': ('tgz', 'gzip', 'gz', 'zip', 'tar', 'rar'),
+        },
+        'audio': {
+            'title': _(u'Audio'),
+            'extensions': ('mp3', 'wav', 'aac', 'aiff', 'flac'),
+        },
+        'document': {
+            'title': _(u'Text document'),
+            'extensions': ('odt', 'doc', 'docx', 'rtf'),
+        },
+        'spreadsheet': {
+            'title': _(u'Spreadsheet'),
+            'extensions': ('ods', 'xlsx', 'xls', ),
+        },
+        'presentation': {
+            'title': _(u'Presentation'),
+            'extensions': ('ppt', 'pptx', 'odp'),
+        },
+    }
+)
 
 #
 # class FolderlessConf(AppConf):

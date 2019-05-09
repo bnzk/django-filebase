@@ -2,6 +2,8 @@
 
 from __future__ import unicode_literals
 import os
+
+from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.core.files.base import File as DjangoFile
 from django.utils.encoding import python_2_unicode_compatible
@@ -27,9 +29,9 @@ OTHER_TYPE = 'other'
 class File(models.Model):
     file = ThumbnailerField(
         _('File'),
-        upload_to=settings.FOLDERLESS_UPLOAD_TO,
-        storage=settings.FOLDERLESS_FILE_STORAGE,
-        thumbnail_storage=settings.FOLDERLESS_THUMBNAIL_STORAGE
+        upload_to=conf.UPLOAD_TO,
+        storage=conf.FILE_STORAGE,
+        thumbnail_storage=conf.THUMBNAIL_STORAGE
     )
     name = models.CharField(
         _('name'), max_length=255, blank=True, default='')
@@ -91,7 +93,7 @@ class File(models.Model):
     @property
     def is_image(self):
         if self.file:
-            image_definition = settings.FOLDERLESS_FILE_TYPES.get(
+            image_definition = conf.FILE_TYPES.get(
                 'image', None)
             if image_definition is not None:
                 if self.extension in image_definition.get('extensions'):
@@ -108,7 +110,7 @@ class File(models.Model):
     @property
     def admin_url(self):
         return urlresolvers.reverse(
-            'admin:folderless_file_change',
+            'admin:FILEBASE_file_change',
             args=(self.pk,)
         )
 
@@ -116,8 +118,8 @@ class File(models.Model):
     def thumb_field_url(self):
         if self.is_image:
             return self._thumb_url(
-                settings.FOLDERLESS_IMAGE_WIDTH_FIELD,
-                settings.FOLDERLESS_IMAGE_HEIGHT_FIELD)
+                conf.IMAGE_WIDTH_FIELD,
+                conf.IMAGE_HEIGHT_FIELD)
         else:
             return
 
@@ -125,8 +127,8 @@ class File(models.Model):
     def thumb_list_url(self):
         if self.is_image:
             return self._thumb_url(
-                settings.FOLDERLESS_IMAGE_WIDTH_LIST,
-                settings.FOLDERLESS_IMAGE_HEIGHT_LIST)
+                conf.IMAGE_WIDTH_LIST,
+                conf.IMAGE_HEIGHT_LIST)
         else:
             return
 
@@ -193,7 +195,7 @@ class File(models.Model):
         return ''
 
 
-@receiver(pre_save, sender=File, dispatch_uid="folderless_file_processing")
+@receiver(pre_save, sender=File, dispatch_uid="FILEBASE_file_processing")
 def process_file(sender, **kwargs):
     """
     what we do here:
@@ -209,7 +211,7 @@ def process_file(sender, **kwargs):
         else:
             instance.extension = ''
         instance.type = OTHER_TYPE
-        for type, definition in settings.FOLDERLESS_FILE_TYPES.items():
+        for type, definition in conf.FILE_TYPES.items():
             if instance.extension in definition.get("extensions"):
                 instance.type = type
         instance.generate_file_hash()
