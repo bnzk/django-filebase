@@ -13,8 +13,8 @@ from django.utils import timezone
 from easy_thumbnails.fields import ThumbnailerField
 from easy_thumbnails.files import get_thumbnailer
 
-from . import conf
-from .utils import get_valid_filename, sha1_from_file, model_get_all_related_objects
+from filebase import conf
+from filebase.utils import get_valid_filename, sha1_from_file, model_get_all_related_objects
 
 # compat
 from django import urls as urlresolvers
@@ -26,9 +26,11 @@ OTHER_TYPE = 'other'
 @python_2_unicode_compatible
 class File(models.Model):
     file = ThumbnailerField(
-        _('File'), upload_to=settings.FOLDERLESS_UPLOAD_TO,
+        _('File'),
+        upload_to=settings.FOLDERLESS_UPLOAD_TO,
         storage=settings.FOLDERLESS_FILE_STORAGE,
-        thumbnail_storage=settings.FOLDERLESS_THUMBNAIL_STORAGE)
+        thumbnail_storage=settings.FOLDERLESS_THUMBNAIL_STORAGE
+    )
     name = models.CharField(
         _('name'), max_length=255, blank=True, default='')
     filename = models.CharField(
@@ -192,7 +194,7 @@ class File(models.Model):
 
 
 @receiver(pre_save, sender=File, dispatch_uid="folderless_file_processing")
-def folderless_file_processing(sender, **kwargs):
+def process_file(sender, **kwargs):
     """
     what we do here:
     - determine file type, set it.

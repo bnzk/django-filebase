@@ -3,6 +3,7 @@ from django.core.files.storage import DefaultStorage
 from django.utils.translation import ugettext_lazy as _
 
 
+
 #
 # class FolderlessConf(AppConf):
 #
