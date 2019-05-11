@@ -27,6 +27,13 @@ OTHER_TYPE = 'other'
 
 @python_2_unicode_compatible
 class File(models.Model):
+    folder = models.ForeignKey(
+        'filebase.Folder',
+        null=True,
+        on_delete=models.CASCADE,
+        default=None,
+        verbose_name=_("files")
+    )
     file = ThumbnailerField(
         _('File'),
         upload_to=conf.UPLOAD_TO,

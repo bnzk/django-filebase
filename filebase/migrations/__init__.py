@@ -1,5 +1,5 @@
 """
-Django migrations for folderless
+Django migrations for filebase
 
 This package does not contain South migrations.  South migrations can be found
 in the ``south_migrations`` package.

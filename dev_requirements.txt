@@ -1,0 +1,8 @@
+
+# lowest supported version, for creating migrations
+django==1.11.15
+
+# testing tools
+flake8
+coverage
+# django-coverage ?

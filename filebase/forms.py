@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django import forms
 
-from folderless.models import File
+from filebase.models import File
 
 
 # no big deal yet

@@ -7,12 +7,14 @@ from django import forms
 from django.contrib.admin.widgets import ForeignKeyRawIdWidget
 from django.contrib.admin.sites import site
 import django
+from django.conf import settings
 from django.db import models
 from django.template.loader import render_to_string
 from django.utils.safestring import mark_safe
 
-from folderless.models import File
-from django.conf import settings
+from filebase.models import File
+from filebase import conf
+
 
 # compat thing!
 if django.VERSION[:2] < (1, 10):
@@ -23,7 +25,7 @@ else:
 
 # this part is mostly inspired by django-filer: https://github.com/stefanfoulis/django-filer/blob/develop/filer/fields/file.py
 # uploader basics: https://github.com/blueimp/jQuery-File-Upload/wiki/Basic-plugin
-class FolderlessFileWidget(ForeignKeyRawIdWidget):
+class FilebaseFileWidget(ForeignKeyRawIdWidget):
     choices = None
 
     def render(self, name, value, attrs=None):
@@ -32,7 +34,7 @@ class FolderlessFileWidget(ForeignKeyRawIdWidget):
             try:
                 File.objects.get(pk=value)
             except Exception:
-                if settings.FOLDERLESS_DEBUG:
+                if conf.DEBUG:
                     raise
 
         params = self.url_parameters()
@@ -55,21 +57,21 @@ class FolderlessFileWidget(ForeignKeyRawIdWidget):
         css_id = attrs.get('id', 'id_file_x')
 
         # related_url = reverse('admin:filer-directory_listing-last')
-        related_url = reverse('admin:folderless_file_changelist')
+        related_url = reverse('admin:filebase_file_changelist')
 
         has_svg = True
         if django.VERSION[:2] < (1, 9):
             has_svg = False
 
         context = {
-            'folderless_static': settings.STATIC_URL + "folderless/",
+            'filebase_static': settings.STATIC_URL + "filebase/",
             'admin_static': settings.STATIC_URL + "admin/",
             'hidden_input': hidden_input,
             'lookup_url': '%s%s' % (related_url, lookup_url),
             'object': obj,
-            'width': settings.FOLDERLESS_IMAGE_WIDTH_FIELD,
-            'height': settings.FOLDERLESS_IMAGE_HEIGHT_FIELD,
-            'size': '%sx%s' % (settings.FOLDERLESS_IMAGE_WIDTH_FIELD, settings.FOLDERLESS_IMAGE_HEIGHT_FIELD),
+            'width': conf.IMAGE_WIDTH_FIELD,
+            'height': conf.IMAGE_HEIGHT_FIELD,
+            'size': '%sx%s' % (conf.IMAGE_WIDTH_FIELD, conf.IMAGE_HEIGHT_FIELD),
             'id': css_id,
             'name': name,
             'img_search': 'img/search.svg' if has_svg else 'img/selector-search.gif',
@@ -78,7 +80,7 @@ class FolderlessFileWidget(ForeignKeyRawIdWidget):
             'img_changelink': 'img/icon-changelink.svg' if has_svg else 'img/icon-changelink.gif',
             'img_deletelink': 'img/icon-deletelink.svg' if has_svg else 'img/icon-deletelink.gif',
         }
-        html = render_to_string('admin/folderless/file_widget.html', context)
+        html = render_to_string('admin/filebase/file_widget.html', context)
         return mark_safe(html)
 
     def label_for_value(self, value):
@@ -102,23 +104,23 @@ class FolderlessFileWidget(ForeignKeyRawIdWidget):
     class Media:
         js = (
             # 'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js',
-            # settings.FOLDERLESS_STATIC_URL + 'js/vendor/jquery-1.9.1.min.js',
-            settings.FOLDERLESS_STATIC_URL + 'js/jquery_pre_init.js',  # for the moment!
-            settings.FOLDERLESS_STATIC_URL + 'js/vendor/jquery.ui.widget.js',
-            settings.FOLDERLESS_STATIC_URL + 'js/vendor/jquery.iframe-transport.js',
-            settings.FOLDERLESS_STATIC_URL + 'js/vendor/jquery.fileupload.js',
-            settings.FOLDERLESS_STATIC_URL + 'js/jquery.folderless_file_widget.js',
-            settings.FOLDERLESS_STATIC_URL + 'js/popup_handling.js',  # in popup, we call "opener.dismisss....
-            settings.FOLDERLESS_STATIC_URL + 'js/jquery.folderless_widget_init.js',
-            settings.FOLDERLESS_STATIC_URL + 'js/jquery_post_init.js',  # for the moment!
+            # conf.STATIC_URL + 'js/vendor/jquery-1.9.1.min.js',
+            conf.STATIC_URL + 'js/jquery_pre_init.js',  # for the moment!
+            conf.STATIC_URL + 'js/vendor/jquery.ui.widget.js',
+            conf.STATIC_URL + 'js/vendor/jquery.iframe-transport.js',
+            conf.STATIC_URL + 'js/vendor/jquery.fileupload.js',
+            conf.STATIC_URL + 'js/jquery.filebase_file_widget.js',
+            conf.STATIC_URL + 'js/popup_handling.js',  # in popup, we call "opener.dismisss....
+            conf.STATIC_URL + 'js/jquery.filebase_widget_init.js',
+            conf.STATIC_URL + 'js/jquery_post_init.js',  # for the moment!
         )
         css = {
-            'screen': (settings.FOLDERLESS_STATIC_URL + "css/folderless.css", )
+            'screen': (conf.STATIC_URL + "css/filebase.css", )
         }
 
 
-class FolderlessFileFormField(forms.ModelChoiceField):
-    widget = FolderlessFileWidget
+class FilebaseFileFormField(forms.ModelChoiceField):
+    widget = FilebaseFileWidget
 
     def __init__(self, rel, queryset, to_field_name, *args, **kwargs):
         self.rel = rel
@@ -135,8 +137,8 @@ class FolderlessFileFormField(forms.ModelChoiceField):
         return {}
 
 
-class FolderlessFileField(models.ForeignKey):
-    default_form_class = FolderlessFileFormField
+class FilebaseFileField(models.ForeignKey):
+    default_form_class = FilebaseFileFormField
     default_model_class = File
 
     def __init__(self, **kwargs):
@@ -145,10 +147,10 @@ class FolderlessFileField(models.ForeignKey):
             kwargs['on_delete'] = models.PROTECT
         if "to" not in kwargs:
             kwargs['to'] = self.default_model_class
-        return super(FolderlessFileField, self).__init__(**kwargs)
+        return super(FilebaseFileField, self).__init__(**kwargs)
 
     def deconstruct(self):
-        name, path, args, kwargs = super(FolderlessFileField, self).deconstruct()
+        name, path, args, kwargs = super(FilebaseFileField, self).deconstruct()
         return name, path, args, kwargs
 
     def formfield(self, **kwargs):
@@ -159,7 +161,7 @@ class FolderlessFileField(models.ForeignKey):
             'rel': self.rel if hasattr(self, 'rel') else self.remote_field,
         }
         defaults.update(kwargs)
-        return super(FolderlessFileField, self).formfield(**defaults)
+        return super(FilebaseFileField, self).formfield(**defaults)
 
     # def south_field_triple(self):
     #     "Returns a suitable description of this field for South."

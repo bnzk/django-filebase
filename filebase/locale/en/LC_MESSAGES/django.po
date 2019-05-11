@@ -5,7 +5,7 @@
 # Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: django-folderless\n"
+"Project-Id-Version: django-filebase\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-18 14:35+0200\n"
 "PO-Revision-Date: 2014-04-19 21:23+0000\n"
@@ -134,48 +134,48 @@ msgstr ""
 msgid "Referenced?"
 msgstr ""
 
-#: templates/admin/folderless/file/change_list.html:9
+#: templates/admin/filebase/file/change_list.html:9
 msgid "of"
 msgstr "of"
 
-#: templates/admin/folderless/file/change_list.html:10
+#: templates/admin/filebase/file/change_list.html:10
 #, fuzzy
 #| msgid "Uploader"
 msgid "uploaded"
 msgstr "Uploader"
 
-#: templates/admin/folderless/file/change_list.html:11
+#: templates/admin/filebase/file/change_list.html:11
 msgid "duplicates/errors"
 msgstr ""
 
-#: templates/admin/folderless/file/change_list.html:14
+#: templates/admin/filebase/file/change_list.html:14
 #, fuzzy
 #| msgid "Uploader"
 msgid "Upload new file"
 msgstr "Uploader"
 
-#: templates/admin/folderless/file_widget.html:21
+#: templates/admin/filebase/file_widget.html:21
 msgid "no file selected"
 msgstr "no file selected"
 
-#: templates/admin/folderless/file_widget.html:31
-#: templates/admin/folderless/file_widget.html:34
-#: templates/admin/folderless/file_widget.html:35
+#: templates/admin/filebase/file_widget.html:31
+#: templates/admin/filebase/file_widget.html:34
+#: templates/admin/filebase/file_widget.html:35
 msgid "Browse"
 msgstr "Browse"
 
-#: templates/admin/folderless/file_widget.html:40
-#: templates/admin/folderless/file_widget.html:41
+#: templates/admin/filebase/file_widget.html:40
+#: templates/admin/filebase/file_widget.html:41
 msgid "Upload"
 msgstr "Upload"
 
-#: templates/admin/folderless/file_widget.html:46
-#: templates/admin/folderless/file_widget.html:47
+#: templates/admin/filebase/file_widget.html:46
+#: templates/admin/filebase/file_widget.html:47
 msgid "Edit"
 msgstr "Edit"
 
-#: templates/admin/folderless/file_widget.html:52
-#: templates/admin/folderless/file_widget.html:53
+#: templates/admin/filebase/file_widget.html:52
+#: templates/admin/filebase/file_widget.html:53
 msgid "Remove"
 msgstr "Remove"
 

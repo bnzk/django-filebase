@@ -8,12 +8,12 @@
 # Ben Stähli <bnzk@bnzk.ch>, 2014
 msgid ""
 msgstr ""
-"Project-Id-Version: django-folderless\n"
+"Project-Id-Version: django-filebase\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-18 14:35+0200\n"
 "PO-Revision-Date: 2015-04-09 09:40+0000\n"
 "Last-Translator: Ben Stähli <bnzk@bnzk.ch>\n"
-"Language-Team: German (http://www.transifex.com/projects/p/django-folderless/"
+"Language-Team: German (http://www.transifex.com/projects/p/django-filebase/"
 "language/de/)\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -138,44 +138,44 @@ msgstr "Vorschau"
 msgid "Referenced?"
 msgstr "Verwendet?"
 
-#: templates/admin/folderless/file/change_list.html:9
+#: templates/admin/filebase/file/change_list.html:9
 msgid "of"
 msgstr "von"
 
-#: templates/admin/folderless/file/change_list.html:10
+#: templates/admin/filebase/file/change_list.html:10
 msgid "uploaded"
 msgstr "hochgeladen"
 
-#: templates/admin/folderless/file/change_list.html:11
+#: templates/admin/filebase/file/change_list.html:11
 msgid "duplicates/errors"
 msgstr "Duplikate/Fehler"
 
-#: templates/admin/folderless/file/change_list.html:14
+#: templates/admin/filebase/file/change_list.html:14
 msgid "Upload new file"
 msgstr "neue Datei hochladen"
 
-#: templates/admin/folderless/file_widget.html:21
+#: templates/admin/filebase/file_widget.html:21
 msgid "no file selected"
 msgstr "Keine Datei ausgewählt"
 
-#: templates/admin/folderless/file_widget.html:31
-#: templates/admin/folderless/file_widget.html:34
-#: templates/admin/folderless/file_widget.html:35
+#: templates/admin/filebase/file_widget.html:31
+#: templates/admin/filebase/file_widget.html:34
+#: templates/admin/filebase/file_widget.html:35
 msgid "Browse"
 msgstr "Durchsuchen"
 
-#: templates/admin/folderless/file_widget.html:40
-#: templates/admin/folderless/file_widget.html:41
+#: templates/admin/filebase/file_widget.html:40
+#: templates/admin/filebase/file_widget.html:41
 msgid "Upload"
 msgstr "Hochladen"
 
-#: templates/admin/folderless/file_widget.html:46
-#: templates/admin/folderless/file_widget.html:47
+#: templates/admin/filebase/file_widget.html:46
+#: templates/admin/filebase/file_widget.html:47
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: templates/admin/folderless/file_widget.html:52
-#: templates/admin/folderless/file_widget.html:53
+#: templates/admin/filebase/file_widget.html:52
+#: templates/admin/filebase/file_widget.html:53
 msgid "Remove"
 msgstr "Entfernen"
 

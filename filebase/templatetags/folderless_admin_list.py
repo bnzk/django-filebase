@@ -8,11 +8,11 @@ register = Library()
 
 
 DISMISS_STRING = u'dismissRelatedLookupPopup'
-REPLACE_STRING = u'dismissRelatedFolderlessLookupPopup'
+REPLACE_STRING = u'dismissRelatedFilebaseLookupPopup'
 
 
 @register.inclusion_tag("admin/change_list_results.html")
-def folderless_result_list(cl):
+def filebase_result_list(cl):
     """
     Displays the headers and data list together
     """

@@ -11,6 +11,7 @@ class Folder(models.Model):
     parent = models.ForeignKey(
         'filebase.Folder',
         null=True,
+        on_delete=models.CASCADE,
         default=None,
         verbose_name=_("parent")
     )

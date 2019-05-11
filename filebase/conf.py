@@ -30,6 +30,10 @@ _get_or_default('UPLOAD_TO', 'files')
 _get_or_default('THUMBNAIL_TO', 'thumbs')
 
 
+# just
+_get_or_default('STATIC_URL', settings.STATIC_URL + "filebase/")
+
+
 # file types
 _get_or_default('FILE_TYPES', {
         'image': {
@@ -72,7 +76,7 @@ _get_or_default('FILE_TYPES', {
 )
 
 #
-# class FolderlessConf(AppConf):
+# class FilebaseConf(AppConf):
 #
 #     class Meta:
 #         proxy = True
@@ -87,7 +91,7 @@ _get_or_default('FILE_TYPES', {
 #     # base thumbnails path
 #     THUMBNAIL_TO = 'thumbs'
 #     # convenience
-#     STATIC_URL = django_settings.STATIC_URL + "folderless/"
+#     STATIC_URL = django_settings.STATIC_URL + "filebase/"
 #     # Image?
 #     FILE_TYPES = {
 #         'image': {

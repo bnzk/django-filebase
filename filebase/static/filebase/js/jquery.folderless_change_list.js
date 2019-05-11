@@ -1,15 +1,15 @@
 (function ($) {
-    $.fn.folderless_change_list = function () {
+    $.fn.filebase_change_list = function () {
         this.each(function () {
             var _self = $(this);
-            var upload_button = _self.find(".folderless_uploader");
-            var upload_info = _self.find(".folderless_upload_info");
+            var upload_button = _self.find(".filebase_uploader");
+            var upload_info = _self.find(".filebase_upload_info");
             var upload_errors_link = _self.find(".upload_errors");
             var upload_errors_info = _self.find(".error_info");
             var files_total = 0;
             var files_uploaded = 0;
             var files_upload_error = 0;
-            var file_input = _self.find(".folderless_fileinput");
+            var file_input = _self.find(".filebase_fileinput");
             var file_result_list = _self.find(".results");
             var popup_candidates = file_result_list.find('a[data-popup-opener]');
 
@@ -31,7 +31,7 @@
             var callDissmissPopup = function(e) {
                 e.preventDefault();
                 e.stopPropagation();
-                opener.dismissRelatedFolderlessLookupPopup(window, $(this).attr('data-popup-opener'));
+                opener.dismissRelatedFilebaseLookupPopup(window, $(this).attr('data-popup-opener'));
             }
 
             var init = function () {
@@ -95,4 +95,4 @@
 
         });
     }
-})(folderless.jQuery);
+})(filebase.jQuery);

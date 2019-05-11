@@ -8,9 +8,10 @@ from django.utils.translation import ugettext_lazy as _
 from django.http import HttpResponse
 from django.forms.models import modelform_factory
 
-from folderless.utils import handle_upload, get_valid_filename, UploadException, sha1_from_file
-from folderless.models import File
-from folderless.forms import FileAdminChangeFrom
+from filebase import conf
+from filebase.utils import handle_upload, get_valid_filename, UploadException, sha1_from_file
+from filebase.models import File
+from filebase.forms import FileAdminChangeFrom
 
 
 class FileDateFilter(admin.SimpleListFilter):
@@ -37,7 +38,7 @@ class FileTypeFilter(admin.SimpleListFilter):
         # distinct ON doesnt work in sqlite3...soo...
         types = []
 
-        for key, definition in settings.FOLDERLESS_FILE_TYPES.items():
+        for key, definition in conf.FILE_TYPES.items():
             types.append((key, definition.get("title")))
 
         return sorted(types, key=lambda type: type[1])
@@ -64,8 +65,8 @@ class FileAdmin(admin.ModelAdmin):
     form = FileAdminChangeFrom
 
     class Media:
-        vendor_path = settings.FOLDERLESS_STATIC_URL + 'js/vendor/'
-        js_path = settings.FOLDERLESS_STATIC_URL + 'js/'
+        vendor_path = conf.STATIC_URL + 'js/vendor/'
+        js_path = conf.STATIC_URL + 'js/'
         js = (
             # 'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js',
             # vendor_path + 'jquery-1.9.1.min.js',
@@ -73,12 +74,12 @@ class FileAdmin(admin.ModelAdmin):
             vendor_path + 'jquery.ui.widget.js',
             vendor_path + 'jquery.iframe-transport.js',
             vendor_path + 'jquery.fileupload.js',
-            js_path + 'jquery.folderless_change_list.js',
+            js_path + 'jquery.filebase_change_list.js',
             js_path + 'jquery_post_init.js',
         )
         css = {
             'screen': (
-                settings.FOLDERLESS_STATIC_URL + 'css/folderless.css',
+                conf.STATIC_URL + 'css/filebase.css',
             )
         }
 
@@ -97,12 +98,12 @@ class FileAdmin(admin.ModelAdmin):
             url(
                 r'^ajax-upload/$',
                 self.admin_site.admin_view(self.ajax_upload),
-                name='folderless-ajax_upload'
+                name='filebase-ajax_upload'
             ),
             url(
                 r'^ajax-info/$',
                 self.admin_site.admin_view(self.ajax_info),
-                name='folderless-ajax_info'
+                name='filebase-ajax_info'
             ),
         ]
         url_patterns.extend(urls)

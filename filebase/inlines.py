@@ -4,9 +4,9 @@ from django.conf import settings
 
 
 # for the future
-class FolderlessMultiUploadInlineMixin():
+class FilebaseMultiUploadInlineMixin():
 
     class Media:
         js = (
-            settings.FOLDERLESS_STATIC_URL + 'js/jquery.folderless_multiupload.js',
+            conf.STATIC_URL + 'js/jquery.filebase_multiupload.js',
         )
