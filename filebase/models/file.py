@@ -32,7 +32,8 @@ class File(models.Model):
         null=True,
         on_delete=models.CASCADE,
         default=None,
-        verbose_name=_("files")
+        blank=True,
+        verbose_name=_("Folder")
     )
     file = ThumbnailerField(
         _('File'),
@@ -41,17 +42,19 @@ class File(models.Model):
         thumbnail_storage=conf.THUMBNAIL_STORAGE
     )
     name = models.CharField(
-        _('name'), max_length=255, blank=True, default='')
+        _('name'),
+        max_length=255,
+        blank=True,
+        default='',
+    )
     filename = models.CharField(
-        _('Filename'),
+        _('filename'),
+        max_length=255,
         help_text=_(u'Use for renaming your file on the server'),
-        max_length=255, blank=False, unique=True)
-    author = models.CharField(
-        _('Author'), max_length=255, blank=True, default='')
-    copyright = models.CharField(
-        _('Copyright'), max_length=255, blank=True, default='')
-    type = models.CharField(
-        _('File type'), max_length=12, choices=(), blank=True)
+        blank=False,
+    )
+
+    # additional system infos
     uploader = models.ForeignKey(
         getattr(settings, 'AUTH_USER_MODEL', 'auth.User'),
         null=True,
@@ -64,8 +67,16 @@ class File(models.Model):
         _('Created'), default=timezone.now)
     modified = models.DateTimeField(
         _('Modified'), auto_now=True)
+
+    # meta info
+    type = models.CharField(
+        _('File type'), max_length=12, choices=(), blank=True)
     extension = models.CharField(
         _('Extension'), max_length=255, blank=True, default='')
+    author = models.CharField(
+        _('Author'), max_length=255, blank=True, default='')
+    copyright = models.CharField(
+        _('Copyright'), max_length=255, blank=True, default='')
     file_hash = models.CharField(
         _('Checksum'), help_text=_(u'For preventing duplicates'),
         max_length=40, blank=False, unique=True)
@@ -124,18 +135,15 @@ class File(models.Model):
     @property
     def thumb_field_url(self):
         if self.is_image:
-            return self._thumb_url(
-                conf.IMAGE_WIDTH_FIELD,
-                conf.IMAGE_HEIGHT_FIELD)
+            return self._thumb_url(*conf.IMAGE_SIZES['FIELD'])
+
         else:
             return
 
     @property
     def thumb_list_url(self):
         if self.is_image:
-            return self._thumb_url(
-                conf.IMAGE_WIDTH_LIST,
-                conf.IMAGE_HEIGHT_LIST)
+            return self._thumb_url(*conf.IMAGE_SIZES['LIST'])
         else:
             return
 

@@ -13,6 +13,7 @@ class Folder(models.Model):
         null=True,
         on_delete=models.CASCADE,
         default=None,
+        blank=True,
         verbose_name=_("parent")
     )
     name = models.CharField(

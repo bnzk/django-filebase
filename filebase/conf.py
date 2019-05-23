@@ -30,7 +30,15 @@ _get_or_default('UPLOAD_TO', 'files')
 _get_or_default('THUMBNAIL_TO', 'thumbs')
 
 
-# just
+# thumb sizes
+_get_or_default('IMAGE_SIZES', {
+        'LIST': (100, 70),
+        'FIELD': (220, 150),
+    }
+)
+
+
+# just because?
 _get_or_default('STATIC_URL', settings.STATIC_URL + "filebase/")
 
 
