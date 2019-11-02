@@ -1,6 +1,6 @@
 
 # lowest supported version, for creating migrations
-django==1.11.19
+django==1.11.23
 
 # testing tools
 flake8
