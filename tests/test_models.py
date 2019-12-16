@@ -5,11 +5,11 @@ from django.test import TestCase
 from django.core.files import File as DjangoFile
 from django.conf import settings
 
-from folderless.models import File
-from folderless.tests.utils import create_superuser, create_image
+from filebase.models import File
+from .utils import create_superuser, create_image
 
 
-class FolderlessModelsTests(TestCase):
+class FilebaseModelsTests(TestCase):
 
     def setUp(self):
         self.superuser = create_superuser()

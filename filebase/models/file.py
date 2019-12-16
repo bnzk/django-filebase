@@ -128,7 +128,7 @@ class File(models.Model):
     @property
     def admin_url(self):
         return urlresolvers.reverse(
-            'admin:FILEBASE_file_change',
+            'admin:filebase_file_change',
             args=(self.pk,)
         )
 
